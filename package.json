@@ -13,7 +13,7 @@
     "async": "1.5.2",
     "bluebird": "3.2.1",
     "deep-diff": "0.3.3",
-    "lodash": "3.10.1",
+    "lodash": "4.17.2",
     "switchback": "2.0.0",
     "prompt": "0.2.14",
     "offshore-criteria": "0.0.2",
