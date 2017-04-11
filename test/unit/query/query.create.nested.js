@@ -68,7 +68,8 @@ describe('Collection Query', function() {
         query.create({ name: 'foo', nestedModel: { name: 'joe' }}, function(err, status) {
           assert(!err);
           assert(status.nestedModel);
-          assert(status.nestedModel === 1);
+          assert(status.nestedModel.id ==== 1);
+          assert(status.nestedModel.name === 'joe');
           done();
         });
       });
@@ -148,7 +149,7 @@ describe('Collection Query', function() {
 
         query.create({ id: 5, name: 'foo', nestedModels: nestedModels }, function(err, status) {
           assert(!err);
-          assert(status.nestedModels.length === 0);
+          assert(status.nestedModels.length === 3);
           assert(findValues.length === 4);
           done();
         });
