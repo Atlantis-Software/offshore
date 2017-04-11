@@ -68,7 +68,7 @@ describe('Collection Query', function() {
         query.create({ name: 'foo', nestedModel: { name: 'joe' }}, function(err, status) {
           assert(!err);
           assert(status.nestedModel);
-          assert(status.nestedModel.id ==== 1);
+          assert(status.nestedModel.id === 1);
           assert(status.nestedModel.name === 'joe');
           done();
         });
