@@ -1,7 +1,7 @@
 {
   "name": "offshore",
   "description": "An ORM for Node.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "contributors": [
     {
       "name": "Alexandre Tiertant",
