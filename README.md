@@ -1,3 +1,10 @@
+[![NPM Version](https://img.shields.io/npm/v/offshore.svg)](https://www.npmjs.com/package/offshore)
+[![NPM Downloads](https://img.shields.io/npm/dm/offshore.svg)](https://www.npmjs.com/package/offshore)
+[![Build](https://img.shields.io/travis/Atlantis-Software/offshore/master.svg?label=build)](https://travis-ci.org/Atlantis-Software/offshore)
+[![Coverage Status](https://coveralls.io/repos/github/Atlantis-Software/offshore/badge.svg?branch=master)](https://coveralls.io/github/Atlantis-Software/offshore?branch=master)
+[![NSP Status](https://nodesecurity.io/orgs/atlantis/projects/f7dbce6c-94a8-4dba-a5c3-fe6d0b08486c/badge)](https://nodesecurity.io/orgs/atlantis/projects/f7dbce6c-94a8-4dba-a5c3-fe6d0b08486c)
+[![Dependencies Status](https://david-dm.org/Atlantis-Software/offshore.svg)](https://david-dm.org/Atlantis-Software/offshore)
+
 
 Offshore is a fork of Waterline project.
 
