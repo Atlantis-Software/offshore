@@ -21,13 +21,15 @@
   },
   "devDependencies": {
     "codeclimate-test-reporter": "0.4.0",
+    "coveralls": "^3.0.0",
     "eslint": "3.11.1",
     "espree": "3.3.2",
     "istanbul": "0.4.5",
-    "should": "11.1.1",
+    "mocha": "3.2.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "offshore-adapter-tests": "~1.0.0",
     "offshore-memory": "~0.1.0",
-    "offshore-adapter-tests": "Atlantis-Software/offshore-adapter-tests",
-    "mocha": "3.2.0"
+    "should": "11.1.1"
   },
   "keywords": [
     "mvc",
@@ -42,10 +44,11 @@
   "repository": "git://github.com/Atlantis-Software/offshore.git",
   "main": "./lib/offshore",
   "scripts": {
-    "test": "make test",
+    "test": "node ./test/runner.js",
+    "cover": "istanbul cover ./test/runner.js",
+    "coveralls": "npm run cover -- --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "prepublish": "npm prune",
     "browserify": "rm -rf .dist && mkdir .dist && browserify lib/offshore.js -s Offshore | uglifyjs > .dist/offshore.min.js",
-    "coverage": "make coverage",
     "lint": "eslint lib --reset"
   },
   "engines": {
