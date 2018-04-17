@@ -23,11 +23,11 @@ because it's the only way to integrate new features.
  + [Deep Populate](https://github.com/Atlantis-Software/offshore-docs/blob/master/queries/query.md#populate)
  + [Cache Mechanism](https://github.com/Atlantis-Software/offshore-docs/blob/master/queries/query.md#cache)
  + [Associations Criteria](https://github.com/Atlantis-Software/offshore-docs/blob/master/models/associations/criteria.md)
+ + [Transactions](https://github.com/Atlantis-Software/offshore-docs/blob/master/transaction/transactions.md)
 
 ## What's Next?
 
 + polymorphic associations
-+ Transactions
 
 ## Installation
 
@@ -589,6 +589,6 @@ All tests are written with [mocha](http://visionmedia.github.com/mocha/) and sho
 To generate the code coverage report, run:
 
 ``` bash
-  $ npm run coverage
+  $ npm run cover
 ```
 And have a look at `coverage/lcov-report/index.html`.
