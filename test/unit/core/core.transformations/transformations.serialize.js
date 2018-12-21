@@ -49,7 +49,7 @@ describe('Core Transformations', function() {
     });
 
     describe('with associations', function() {
-      var transformer;
+      var colls = {};
 
       /**
        * Build up real offshore schema for accurate testing
@@ -66,6 +66,10 @@ describe('Core Transformations', function() {
             uuid: {
               type: 'string',
               primaryKey: true
+            },
+            foo: {
+              collection: 'foo',
+              via: 'customer'
             }
           }
         }));
@@ -75,26 +79,76 @@ describe('Core Transformations', function() {
           tableName: 'foo',
           attributes: {
             customer: {
-              model: 'customer'
+              model: 'customer',
+              columnName: 'customer_uuid'
+            },
+            bar: {
+              model: 'bar',
+              columnName: 'foobar_id'
+            }
+          }
+        }));
+
+        collections.push(Offshore.Collection.extend({
+          identity: 'bar',
+          tableName: 'bar',
+          attributes: {
+            id: {
+              type: 'integer',
+              primaryKey: true,
+              columnName: 'bar_id'
+            },
+            name: {
+              type: 'string',
+              columnName: 'bar_name'
             }
           }
         }));
 
         var schema = new Schema(collections);
-        transformer = new Transformer(schema.foo.attributes, schema.schema);
+        colls.foo = {
+          _transformer: new Transformer(schema.foo.attributes, colls)
+        };
+        colls.customer = {
+          _transformer: new Transformer(schema.customer.attributes, colls)
+        };
+        colls.bar = {
+          _transformer: new Transformer(schema.bar.attributes, colls)
+        };
       });
 
       it('should change customer key to customer_uuid', function() {
-        var values = transformer.serialize({ customer: 1 });
-        assert(values.customer);
-        assert(values.customer === 1);
+        var values = colls.foo._transformer.serialize({ customer: 1 });
+        assert(values.customer_uuid);
+        assert(values.customer_uuid === 1);
       });
 
       it('should work recursively', function() {
-        var values = transformer.serialize({ where: { user: { customer: 1 }}});
-        assert(values.where.user.customer);
-        assert(values.where.user.customer === 1);
+        var values = colls.foo._transformer.serialize({ where: { user: { customer: 1 }}});
+        assert(values.where.user.customer_uuid);
+        assert(values.where.user.customer_uuid === 1);
       });
+
+      it('should work deeply', function() {
+        var values = colls.customer._transformer.serialize({
+          where: {
+            foo: {
+              and: [
+                { bar: [1, 2] },
+                { bar: { name: 'a' }}
+              ]
+            }
+          },
+          sort: { 'foo.bar.name': -1 }
+        });
+        assert.deepEqual(values.where.foo.and, [
+          { foobar_id: [1, 2] },
+          { bar: { bar_name: 'a' } }
+        ]);
+        assert(values.sort['foo.bar.bar_name']);
+        assert.equal(values.sort['foo.bar.bar_name'], -1);
+      });
+
     });
   });
 
